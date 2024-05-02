@@ -1,0 +1,48 @@
+# apple iphone sales analysis
+
+
+# 1.objective
+import pandas as pd
+import numpy as np
+import plotly.express as px
+import plotly.graph_objects as go
+df=pd.read_csv("apple_products.csv")
+print(df)
+
+# 2.data cleaning
+print(df.isnull().sum())
+
+# 3.descriptive analysis to find statiscal
+print(df.describe())
+
+# top 10 apple iphone sales analysis in india
+highest_rated=df.sort_values(by=["Star Rating"],ascending=False)
+highest_rated=highest_rated.head(10)
+print(highest_rated['Product Name'])
+
+# lets have a look at the number of ratings of the highest rated iphone on flipkart
+iphones=highest_rated["Product Name"].value_counts()
+print(iphones)
+labels=iphones.index
+counts=highest_rated["Number Of Ratings"]
+figure=px.bar(highest_rated,x=labels,y=counts,title="Number of ratings of highest rated iphones")
+figure.show()
+
+iphones=highest_rated["Product Name"].value_counts()
+print(iphones)
+labels=iphones.index
+counts=highest_rated["Number Of Reviews"]
+figure=px.bar(highest_rated,x=labels,y=counts,title="Number of ratings of highest rated iphones")
+figure.show()
+
+figure = px.scatter(data_frame=df, x="Number Of Ratings", y="Sale Price", size="Discount Percentage", trendline="ols", title="Relationship between Sale Price and Number of Ratings")
+
+# Show the plot
+figure.show()
+
+figure = px.scatter(data_frame=df, x="Number Of Ratings", y="Discount Percentage", size="Sale Price", trendline="ols", title="Relationship between Perccentage and Number of Ratings")
+
+# Show the plot
+figure.show()
+
+
